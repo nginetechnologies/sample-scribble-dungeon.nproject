@@ -1,0 +1,17 @@
+property.radiusVector = { x = 0.01, y = 0.0, z = 0.0, _type="vec3"} 
+property.offsetVector = { x = 0.0, y = 0.0, z = 0.0, _type="vec3"}
+
+local e = 0;
+component.update = function (delta)
+    e = e + delta;
+    local oldPosition = component.GetPosition()
+    local newPosition = {
+        x = oldPosition.x + math.sin(e + property.offsetVector.x) * property.radiusVector.x,
+        y = oldPosition.y + math.cos(e + property.offsetVector.y) * property.radiusVector.y,
+        z = oldPosition.z + math.cos(e + property.offsetVector.z) * property.radiusVector.z,
+        _type = "vec3"
+    }
+    component.SetPosition(newPosition)
+end
+
+physics.ConvertToKinematic()
